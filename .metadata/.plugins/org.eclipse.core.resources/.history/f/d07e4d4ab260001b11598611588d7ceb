@@ -1,0 +1,5 @@
+package com.egen.ecom.model;
+
+public class Item {
+
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.egen.ecom.enums.AddressTypeEnum"/>
+    <fullyQualifiedTypeName name="com.egen.ecom.enums.DeliveryTypeEnum"/>
+    <fullyQualifiedTypeName name="com.egen.ecom.enums.OrderStatusEnum"/>
+    <fullyQualifiedTypeName name="org.springframework.util.CollectionUtils"/>
+    <fullyQualifiedTypeName name="org.springframework.web.multipart.commons.CommonsFileUploadSupport"/>
+    <fullyQualifiedTypeName name="org.apache.commons.collections4.CollectionUtils"/>
+</qualifiedTypeNameHistroy>

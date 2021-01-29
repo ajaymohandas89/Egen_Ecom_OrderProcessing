@@ -1,0 +1,5 @@
+package com.egen.ecom.enums;
+
+public class AddressTypeEnum {
+
+}
