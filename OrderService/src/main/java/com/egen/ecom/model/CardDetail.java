@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CardDetails")
+@Table(name = "cardDetails")
 @EntityListeners(AuditingEntityListener.class)
 public class CardDetail {
 	@Id

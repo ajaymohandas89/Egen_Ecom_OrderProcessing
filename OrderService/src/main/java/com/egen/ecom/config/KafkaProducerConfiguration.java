@@ -18,7 +18,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 public class KafkaProducerConfiguration {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	@Value(value = "${kafka.bootstrapAddress}")
+	@Value(value = "${kafka.Address}")
 	private String bootstrapAddress;
 
 	@Bean

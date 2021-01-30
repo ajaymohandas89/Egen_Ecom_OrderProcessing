@@ -33,10 +33,10 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 public class KafkaConsumerConfiguration {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	@Value(value = "${kafka.bootstrapAddress}")
+	@Value(value = "${kafka.Address}")
 	private String bootstrapAddress;
 
-	@Value(value = "${kafka.groupId}")
+	@Value(value = "${kafka.grpId}")
 	private String groupId;
 
 	@Value(value = "${kafka.auto.offset.reset}")
@@ -45,7 +45,7 @@ public class KafkaConsumerConfiguration {
 	@Value(value = "${kafka.enable.auto.commit}")
 	private Boolean autoCommit;
 
-	@Value(value = "${kafka.max.poll.records}")
+	@Value(value = "${kafka.max.records}")
 	private String max_poll_records;
 
 	@Bean

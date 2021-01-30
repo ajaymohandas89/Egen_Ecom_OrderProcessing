@@ -38,7 +38,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Order")
+@Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
 public class Order {
 
@@ -54,12 +54,12 @@ public class Order {
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Payment> payments = new HashSet<>();
 
-	@Column(name = "CreateDate", updatable = false)
+	@Column(name = "createDate", updatable = false)
 	@Temporal(TemporalType.DATE)
 	@CreatedDate
 	private Date orderedAt;
 
-	@Column(name = "UpdatedDate")
+	@Column(name = "updatedDate")
 	@Temporal(TemporalType.DATE)
 	@LastModifiedDate
 	private Date updatedAt;
@@ -74,7 +74,7 @@ public class Order {
 	private Double total;
 
 	@Enumerated(EnumType.STRING)
-	private DeliveryTypeEnum delivery_method;
+	private DeliveryTypeEnum deliveryType;
 
 	@ManyToOne(optional = false)
 	@JoinColumn

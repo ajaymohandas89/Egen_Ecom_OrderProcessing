@@ -36,10 +36,10 @@ public class BulkOrdersController {
 	@Autowired
 	private KafkaService kafkaService;
 
-	@Value(value = "${kafka.orderservice.create.topic}")
+	@Value(value = "${kafka.ecom.create.topic}")
 	private String orderCreateTopic;
 
-	@Value(value = "${kafka.orderservice.cancel.topic}")
+	@Value(value = "${kafka.ecom.cancel.topic}")
 	private String orderCancelTopic;
 
 	@Autowired

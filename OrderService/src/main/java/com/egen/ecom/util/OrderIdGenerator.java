@@ -34,7 +34,7 @@ public class OrderIdGenerator {
 	// Create SequenceGenerator with a nodeId
 	public OrderIdGenerator(int nodeId) {
 		if (nodeId < 0 || nodeId > maxNodeId) {
-			throw new IllegalArgumentException(String.format("NodeId must be between %d and %d", 0, maxNodeId));
+			throw new IllegalArgumentException(String.format("NodeId must be between the range of %d and %d", 0, maxNodeId));
 		}
 		this.nodeId = nodeId;
 	}
@@ -48,7 +48,7 @@ public class OrderIdGenerator {
 		long currentTimestamp = timestamp();
 
 		if (currentTimestamp < lastTimestamp) {
-			throw new IllegalStateException("Invalid System Clock!");
+			throw new IllegalStateException("Invalid System timestamp!");
 		}
 
 		if (currentTimestamp == lastTimestamp) {
@@ -83,6 +83,7 @@ public class OrderIdGenerator {
 		return currentTimestamp;
 	}
 
+	//create a node
 	private int createNodeId() {
 		int nodeId;
 		try {

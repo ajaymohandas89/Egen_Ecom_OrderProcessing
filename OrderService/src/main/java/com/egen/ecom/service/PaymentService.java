@@ -43,9 +43,11 @@ public class PaymentService {
 	@Autowired
 	private RestTemplateHelper restTemplateHelper;
 
+	//method to save the payment
 	public Payment savePayment(PaymentServiceResponse paymentsData, Order order) {
 		LOG.info("database operation for payment details initialized");
 		CardDetail cardDetail = saveCardDetail(paymentsData);
+		
 		Payment payment = new Payment();
 		payment.setId(paymentsData.getId());
 		payment.setAmount(paymentsData.getAmount());
@@ -60,14 +62,17 @@ public class PaymentService {
 		return paymentRepository.save(payment);
 	}
 
+	//method to save card details
 	public CardDetail saveCardDetail(PaymentServiceResponse paymentsData) {
 		CardDetail cardDetail = new CardDetail();
+		LOG.debug("database operation for card details initialized");
 		cardDetail.setCountry(paymentsData.getPayment_method_details().getCard().getCountry());
 		cardDetail.setExpiredMonth(paymentsData.getPayment_method_details().getCard().getExpiredMonth());
 		cardDetail.setExpiredYear(paymentsData.getPayment_method_details().getCard().getExpiredYear());
 		cardDetail.setFingerprint(paymentsData.getPayment_method_details().getCard().getFingerprint());
 		cardDetail.setLastFourDigit(paymentsData.getPayment_method_details().getCard().getLastFourDigit());
 		cardDetail.setNetwork(paymentsData.getPayment_method_details().getCard().getNetwork());
+		
 		return cardDetailRepository.save(cardDetail);
 	}
 

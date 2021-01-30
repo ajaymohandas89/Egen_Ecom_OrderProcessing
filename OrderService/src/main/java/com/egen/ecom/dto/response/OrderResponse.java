@@ -9,7 +9,7 @@ import lombok.Data;
 public class OrderResponse {
     private Long orderID;
 
-	private UUID order_customer_id;
+	private UUID orderCustomerId;
 
 	private List<ItemServiceResponse> items;
 
@@ -17,15 +17,15 @@ public class OrderResponse {
 
 	private Date updatedAt;
 
-	private String order_status;
+	private String orderStatus;
 
-	private Double order_subtotal;
+	private Double orderSubtotal;
 
-	private Double order_tax;
+	private Double tax_fee;
 
 	private Double total;
 
-	private String delivery_method;
+	private String deliveryType;
 
 	private AddressResponse order_shipping_address;
 

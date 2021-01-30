@@ -55,6 +55,7 @@ public class OrderService {
 	@Autowired
 	private OrderIdGenerator squenceGenerator;
 
+	//Method to save the order
 	public Order saveOrder(Long orderID, OrderCreateRequest orderReq, List<PaymentServiceResponse> transactions,
 			List<ItemServiceResponse> inventoryItems) {
 		LOG.info("Started database operation for create order request");
@@ -62,7 +63,7 @@ public class OrderService {
 				AddressTypeEnum.SHIPPING_ADDRESS);
 		Address billing_addr = getOrCreateAddressMapping(orderReq.getOrder_billing_address(),
 				AddressTypeEnum.BILLING_ADDRESS);
-
+		
 		LOG.info("Address Saved Successfully");
 		Order order = new Order();
 		order.setOrderID(orderID == null ? squenceGenerator.nextId() : orderID);
@@ -71,11 +72,11 @@ public class OrderService {
 		order.setOrder_shipping_address(shipping_addr);
 		order.setOrder_billing_address(billing_addr);
 		order.setOrderStatus(OrderStatusEnum.ACCEPTED);
-		order.setDelivery_method(fetchDeliveryMethod(orderReq.getDeliveryType()));
+		order.setDeliveryType(fetchDeliveryMethod(orderReq.getDeliveryType()));
 		order = orderRepository.save(order);
 
 		LOG.info("Order Saved Successfully");
-
+		//method to save every transaction
 		Set<Payment> pays = new HashSet<>();
 		for (PaymentServiceResponse tran : transactions) {
 			Payment payment = paymentService.savePayment(tran, order);
@@ -83,6 +84,7 @@ public class OrderService {
 		}
 		order.setPayments(pays);
 
+		//method to save every items of inventory
 		LOG.info("Payments Saved Successfully");
 		List<Item> items = new ArrayList<>();
 		for (ItemServiceResponse itemRes : inventoryItems) {
@@ -94,6 +96,7 @@ public class OrderService {
 		return order;
 	}
 
+	//Method to map addresses
 	public Address getOrCreateAddressMapping(AddressRequest addressReq, AddressTypeEnum type) {
 		Address addr = null;
 		if (null != addressReq.getId() && !addressReq.getId().toString().isEmpty()) {
@@ -125,7 +128,8 @@ public class OrderService {
 		order.setOrderStatus(OrderStatusEnum.CANCELLED);
 		return orderRepository.save(order);
 	}
-
+	
+	//method to create bulk order processing
 	public void createBulkOrder(Long orderID, OrderCreateRequest orderReq) {
 		try {
 			LOG.info("Future REST calls started");
@@ -184,6 +188,7 @@ public class OrderService {
 		}
 	}
 
+	//method to cancel the order in bulk
 	public void cancelBulkOrder(Long orderID) {
 		try {
 			Optional<Order> order = getOrderByOrderId(orderID);
@@ -203,6 +208,7 @@ public class OrderService {
 		}
 	}
 
+	//method to validate delivery method
 	public boolean validateDeliveryMethod(String delivery_method) {
 		for (DeliveryTypeEnum method : DeliveryTypeEnum.values()) {
 			if (method.name().equals(delivery_method)) {
@@ -212,6 +218,7 @@ public class OrderService {
 		return false;
 	}
 
+	//method to fetch delivery method
 	public DeliveryTypeEnum fetchDeliveryMethod(String delivery_method) {
 		for (DeliveryTypeEnum method : DeliveryTypeEnum.values()) {
 			if (method.name().equals(delivery_method)) {

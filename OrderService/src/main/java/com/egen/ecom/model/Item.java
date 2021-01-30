@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Item")
+@Table(name = "items")
 public class Item implements Serializable{
 
 	/**

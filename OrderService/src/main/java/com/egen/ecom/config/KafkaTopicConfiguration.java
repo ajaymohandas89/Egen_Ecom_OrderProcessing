@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
 @Configuration
 public class KafkaTopicConfiguration {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-    @Value(value = "${kafka.bootstrapAddress}")
+    @Value(value = "${kafka.Address}")
 	private String bootstrapAddress;
 
-	@Value(value = "${kafka.orderservice.create.topic}")
+	@Value(value = "${kafka.ecom.create.topic}")
 	private String orderCreateTopic;
 
-	@Value(value = "${kafka.orderservice.cancel.topic}")
+	@Value(value = "${kafka.ecom.cancel.topic}")
 	private String orderCancelTopic;
 
 	@Bean

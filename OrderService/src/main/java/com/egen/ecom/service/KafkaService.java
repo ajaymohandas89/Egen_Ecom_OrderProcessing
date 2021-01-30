@@ -23,10 +23,10 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class KafkaService {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaService.class);
 
-	@Value(value = "${kafka.orderservice.create.topic}")
+	@Value(value = "${kafka.ecom.create.topic}")
 	private String orderCreateTopic;
 
-	@Value(value = "${kafka.orderservice.cancel.topic}")
+	@Value(value = "${kafka.ecom.cancel.topic}")
 	private String orderCancelTopic;
 
 	@Value(value = "${kafka.timeinterval.sleep:1000}")
@@ -58,39 +58,41 @@ public class KafkaService {
 		});
 	}
 
-	@KafkaListener(topics = "${kafka.orderservice.create.topic}", containerFactory = "kafkaListenerContainerFactoryCreateOrder")
+	//kafka listener for group create
+	@KafkaListener(topics = "${kafka.ecom.create.topic}", containerFactory = "kafkaListenerContainerFactoryCreateOrder")
 	public void listenGroupCreate(@Payload List<OrderCreateRequest> messages,
 			@Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys) {
-		LOG.info("Consume batch messages started for topic={}", "${kafka.orderservice.create.topic}");
+		LOG.info("Consume batch messages started for topic={}", "${kafka.ecom.create.topic}");
 		try {
 			for (int i = 0; i < messages.size(); i++) {
 				LOG.info("Received message Order ID='{}'", keys.get(i));
 				LOG.debug("received message='{}'", messages.get(i));
 				orderService.createBulkOrder(Long.parseLong(keys.get(i)), messages.get(i));
 			}
-			LOG.info("Thread Sleep started for topic={} consumer", "${kafka.orderservice.create.topic}");
+			LOG.info("Thread Sleep started for topic={} consumer", "${kafka.ecom.create.topic}");
 			Thread.sleep(sleepTimeInterval);
 		} catch (InterruptedException e) {
 			LOG.error(e.getStackTrace().toString());
 			return;
 		}
-		LOG.info("Batch Messages consumed successfully for topic={}", "${kafka.orderservice.create.topic}");
+		LOG.info("Batch Messages consumed successfully for topic={}", "${kafka.ecom.create.topic}");
 	}
 
-	@KafkaListener(topics = "${kafka.orderservice.cancel.topic}", containerFactory = "kafkaListenerContainerFactoryUpdateOrder")
+	// kafka listener for group update
+	@KafkaListener(topics = "${kafka.ecom.cancel.topic}", containerFactory = "kafkaListenerContainerFactoryUpdateOrder")
 	public void listenGroupUpdate(@Payload List<List<Long>> messages) {
-		LOG.info("Starting to consume batch messages for topic={}", "${kafka.orderservice.cancel.topic}");
+		LOG.info("Starting to consume batch messages for topic={}", "${kafka.ecom.cancel.topic}");
 		try {
 			for (int i = 0; i < messages.size(); i++) {
 				LOG.info("Received message Order ID='{}'", messages.get(i));
 				messages.get(i).forEach(id -> orderService.cancelBulkOrder(id));
 			}
-			LOG.info("Initiating Thread Sleep for topic={} consumer", "${kafka.orderservice.cancel.topic}");
+			LOG.info("Initiating Thread Sleep for topic={} consumer", "${kafka.ecom.cancel.topic}");
 			Thread.sleep(sleepTimeInterval);
 		} catch (InterruptedException e) {
 			LOG.error(e.getStackTrace().toString());
 			return;
 		}
-		LOG.info("successfully Batch Messages consumed for topic={}", "${kafka.orderservice.cancel.topic}");
+		LOG.info("successfully Batch Messages consumed for topic={}", "${kafka.ecom.cancel.topic}");
 	}
 }

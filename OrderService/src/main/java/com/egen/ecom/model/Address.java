@@ -24,7 +24,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Address")
+@Table(name = "address")
 @EntityListeners(AuditingEntityListener.class)
 public class Address {
 	@Id

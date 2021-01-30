@@ -23,7 +23,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Payments")
+@Table(name = "payments")
 @EntityListeners(AuditingEntityListener.class)
 public class Payment {
     @Id

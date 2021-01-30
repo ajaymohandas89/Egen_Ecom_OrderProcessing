@@ -44,14 +44,15 @@ public class ItemService {
 	}
 
 	public List<Future<?>> initiateInventoryCheck(OrderCreateRequest orderReq) {
-		LOG.info("initliazing REST inventory check item");
+		LOG.debug("initliazing REST inventory check item");
 		List<Future<?>> itemFuture = new ArrayList<>();
+		//for every order items we get entities from rest template
 		for (ItemRequest item : orderReq.getItems()) {
 			Future<?> itemResponse = restTemplateHelper.getForEntity(ItemServiceResponse.class, ErrorMessageResponse.class,
 					List.class, inventoryServiceURI, null, item.getItemName());
 			itemFuture.add(itemResponse);
 		}
-		LOG.info("REST request for invenotory check Item was raised Successfully");
+		LOG.debug("REST request for invenotory check Item was raised Successfully");
 		return itemFuture;
 	}
 }
