@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "5afbff8a-758a-44f4-b3bf-dae6d8d76211",
+		"name": "Ecomm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderCustomerId\" : \"1fce28c5-52d8-4af2-bd74-0049532a2369\",\n    \"orderSubtotal\":300,\n    \"tax_fee\":6.52,\n    \"deliveryType\":\"ONLINE_DELIVERY\",\n    \"items\":[\n        {\n            \"itemName\":\"ITEMA\",\n            \"itemQuantity\":2\n        },\n        {\n            \"itemName\":\"ITEMB\",\n            \"itemQuantity\":5\n        }\n    ],\n    \"payments\":[\n        {\n            \"amount\":\"50\",\n\t        \"currency\":\"usd\",\n\t        \"stored_card_name\":\"tok_visa\"\n        },\n        {\n            \"amount\":\"50\",\n\t        \"currency\":\"usd\",\n\t        \"stored_card_name\":\"tok_mastercard\"\n        }\n    ],\n    \"order_shipping_address\":{\n        \"addressId\": \"f2ef2352-105a-4185-b927-c696279da4d9\",\n        \"lineOne\":\"1171 Boylston St\",\n        \"lineTwo\":\"Apt 1\",\n        \"city\":\"Boston\",\n        \"state\":\"MA\",\n        \"zip\":\"02215\"\n    },\n    \"order_billing_address\":{\n        \"addressId\": \"0d981bce-1a09-4ef6-a600-8298d63afc10\",\n        \"lineOne\":\"1171 Boylston St\",\n        \"lineTwo\":\"Apt 1\",\n        \"city\":\"Boston\",\n        \"state\":\"MA\",\n        \"zip\":\"02215\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Bulk Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orders\": [\n        {\n            \"orderCustomerId\" : \"3bd628c5-52d8-4af2-bd74-b949532a236d\",\n            \"orderSubtotal\":199,\n            \"tax_fee\":5.19,\n            \"deliveryType\":\"ONLINE_DELIVERY\",\n            \"items\":[\n                {\n                    \"itemName\":\"ITEMA\",\n                    \"itemQuantity\":2\n                },\n                {\n                    \"itemName\":\"ITEMB\",\n                    \"itemQuantity\":5\n                }\n            ],\n            \"payments\":[\n                {\n                    \"amount\":\"50\",\n                    \"currency\":\"usd\",\n                    \"stored_card_name\":\"tok_visa\"\n                },\n                {\n                    \"amount\":\"50\",\n                    \"currency\":\"usd\",\n                    \"stored_card_name\":\"tok_mastercard\"\n                }\n            ],\n            \"order_shipping_address\":{\n               \"addressId\": \"f2ef2352-105a-4185-b927-c696279da4d9\",\n                \"lineOne\":\"1185 Boylston St\",\n                \"lineTwo\":\"Apt 19\",\n                \"city\":\"Boston\",\n                \"state\":\"MA\",\n                \"zip\":\"02215\"\n            },\n            \"order_billing_address\":{\n                \"addressId\": \"f2ef2352-105a-4185-b927-c696279da4d9\",\n                \"lineOne\":\"1125 Boylston St\",\n                \"lineTwo\":\"Apt 29\",\n                \"city\":\"Boston\",\n                \"state\":\"MA\",\n                \"zip\":\"02215\"\n            }\n        },\n        {\n            \"orderCustomerId\" : \"3bd628c5-52d8-4af2-bd74-b949532a236d\",\n            \"orderSubtotal\":299,\n            \"tax_fee\":5.22,\n            \"deliveryType\":\"CASH_ON_DELIVERY\",\n            \"items\":[\n                {\n                    \"itemName\":\"ITEMA\",\n                    \"itemQuantity\":2\n                },\n                {\n                    \"itemName\":\"ITEMC\",\n                    \"itemQuantity\":5\n                }\n            ],\n            \"payments\":[\n                {\n                    \"amount\":\"100\",\n                    \"currency\":\"usd\",\n                    \"stored_card_name\":\"tok_visa\"\n                },\n                {\n                    \"amount\":\"100\",\n                    \"currency\":\"usd\",\n                    \"stored_card_name\":\"tok_mastercard\"\n                }\n            ],\n            \"order_shipping_address\":{\n               \"addressId\": \"f2ef2352-105a-4185-b927-c696279da4d9\",\n                \"lineOne\":\"1185 Boylston St\",\n                \"lineTwo\":\"Apt 19\",\n                \"city\":\"Boston\",\n                \"state\":\"MA\",\n                \"zip\":\"02215\"\n            },\n            \"order_billing_address\":{\n                \"addressId\": \"f2ef2352-105a-4185-b927-c696279da4d9\",\n                \"lineOne\":\"1125 Boylston St\",\n                \"lineTwo\":\"Apt 29\",\n                \"city\":\"Boston\",\n                \"state\":\"MA\",\n                \"zip\":\"02215\"\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/bulkOrders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"bulkOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Bulk Orders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orders\": [\n        4103225510731776\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/bulkOrders/cancellation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"bulkOrders",
+						"cancellation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch All Orders",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HealthCheck",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/apiTestCheck",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"apiTestCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Order By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/orders/3664577501863936",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"3664577501863936"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Order By ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/orders/4103225594617856/cancellation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"4103225594617856",
+						"cancellation"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "uuid",
+			"value": "8add109e-74a8-491b-b845-fb9d9256c07b"
+		}
+	]
+}
